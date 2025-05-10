@@ -1,0 +1,113 @@
+---
+---
+
+<section class="about-section section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-content">
+        <h2 class="about-title fade-in">About Me</h2>
+        <p class="about-description fade-in">
+          I'm a UX/UI Designer and Product Manager with over 5 years of experience shaping digital products that solve real problems and engage users. I bring together design thinking and product strategy to craft intuitive, impactful experiences that align with both user needs and business objectives.
+        </p>
+        <p class="about-description fade-in">
+          I've collaborated with both emerging teams finding their footing and well-established organisations, helping them strengthen their digital presence through purposeful design and strategic product development.
+        </p>
+        <div class="about-actions fade-in">
+          <a href="/about" class="button">Learn More</a>
+        </div>
+      </div>
+      
+      <div class="about-image-container fade-in">
+        <img 
+          src="https://images.pexels.com/photos/3987066/pexels-photo-3987066.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+          alt="James at work" 
+          class="about-image"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+    align-items: center;
+  }
+  
+  .about-title {
+    margin-bottom: var(--space-5);
+  }
+  
+  .about-description {
+    font-size: 1.125rem;
+    color: var(--color-secondary);
+    margin-bottom: var(--space-4);
+  }
+  
+  .about-actions {
+    margin-top: var(--space-5);
+  }
+  
+  .about-image-container {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transform: scale(1.05);
+    transition: transform 0.8s ease;
+  }
+  
+  .about-image-container:hover .about-image {
+    transform: scale(1);
+  }
+  
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+    
+    .about-image-container {
+      order: -1;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  
+  gsap.registerPlugin(ScrollTrigger);
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    fadeElements.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { 
+          opacity: 0,
+          y: 30
+        },
+        { 
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+  });
+</script>

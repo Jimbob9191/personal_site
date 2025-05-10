@@ -1,0 +1,425 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+
+export function getStaticPaths() {
+  // This would typically come from a CMS or data file
+  const projects = [
+    {
+      title: "Finance App Redesign",
+      slug: "finance-app",
+      client: "FinTech Solutions",
+      year: "2023",
+      category: "UX/UI Design",
+      description: "A comprehensive redesign of a personal finance management application to improve usability, engagement, and user satisfaction.",
+      challenge: "The existing app had low engagement metrics with high drop-off rates. Users found the interface confusing and struggled to complete basic tasks like transaction categorization and budget setting.",
+      solution: "I employed a user-centered design approach, beginning with extensive user research to identify pain points. The redesign focused on simplifying the information architecture, creating a more intuitive navigation system, and designing clean, focused interfaces that highlight the most important financial data.",
+      results: "The redesigned app saw a 40% increase in daily active users, a 65% improvement in task completion rates, and significantly higher user satisfaction scores in post-launch surveys.",
+      image: "https://images.pexels.com/photos/6804581/pexels-photo-6804581.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      mockups: [
+        "https://images.pexels.com/photos/4386321/pexels-photo-4386321.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/4386440/pexels-photo-4386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/4386339/pexels-photo-4386339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      ]
+    },
+    {
+      title: "E-commerce Website",
+      slug: "ecommerce-website",
+      client: "Boutique Brands",
+      year: "2022",
+      category: "Web Design & Development",
+      description: "A complete redesign and development of an e-commerce platform for a boutique fashion retailer, focusing on conversion optimization and mobile experience.",
+      challenge: "The client's existing website had poor mobile performance, low conversion rates, and an outdated visual design that didn't align with their premium brand positioning.",
+      solution: "I created a modern, responsive design system that prioritized product discovery and streamlined the checkout process. The new design incorporated high-quality product photography, improved product filtering, and a simplified checkout flow to reduce cart abandonment.",
+      results: "The new website achieved a 35% increase in mobile conversions, 28% higher average order value, and a 45% reduction in cart abandonment rates within the first three months after launch.",
+      image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      mockups: [
+        "https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/5632403/pexels-photo-5632403.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/5632404/pexels-photo-5632404.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      ]
+    },
+    {
+      title: "Health & Wellness Platform",
+      slug: "health-platform",
+      client: "Vitality Health",
+      year: "2022",
+      category: "Product Design",
+      description: "A comprehensive health and wellness platform designed to help users track their fitness goals, nutrition, and mental wellbeing in one integrated experience.",
+      challenge: "The client wanted to create a differentiated product in the crowded health app market, focusing on holistic wellness rather than just physical fitness or nutrition in isolation.",
+      solution: "I developed a comprehensive product strategy and design system that unified various health metrics into meaningful insights. The design incorporated customizable dashboards, progress visualization, and behavior science principles to encourage habit formation.",
+      results: "The platform launched successfully with 50,000+ downloads in the first month, 68% user retention after 30 days, and positive reviews highlighting the intuitive design and holistic approach.",
+      image: "https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      mockups: [
+        "https://images.pexels.com/photos/4226119/pexels-photo-4226119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/4226242/pexels-photo-4226242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/4226256/pexels-photo-4226256.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      ]
+    },
+    {
+      title: "Travel Booking App",
+      slug: "travel-app",
+      client: "Wanderlust",
+      year: "2021",
+      category: "Mobile App Design",
+      description: "A travel booking application focused on curated, personalized travel experiences for adventure-seeking millennials.",
+      challenge: "The market was saturated with generic travel booking apps that failed to address the specific needs and preferences of experience-focused travelers.",
+      solution: "I designed a mobile app that emphasizes discovery and personalization, using machine learning to suggest destinations and activities based on user preferences. The design incorporates immersive imagery, local insights, and seamless booking functionality.",
+      results: "The app achieved a 4.8/5 star rating on app stores, with users specifically praising the intuitive interface and personalized recommendations. The client reported 200% growth in bookings compared to their previous platform.",
+      image: "https://images.pexels.com/photos/2007401/pexels-photo-2007401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      mockups: [
+        "https://images.pexels.com/photos/5054776/pexels-photo-5054776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/5054349/pexels-photo-5054349.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/5054351/pexels-photo-5054351.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      ]
+    },
+    {
+      title: "Music Streaming Dashboard",
+      slug: "music-dashboard",
+      client: "Rhythm Records",
+      year: "2023",
+      category: "Dashboard Design",
+      description: "A comprehensive analytics dashboard for music artists to track streaming performance, audience demographics, and revenue across multiple platforms.",
+      challenge: "Musicians and labels were struggling to consolidate and interpret data from various streaming platforms, making it difficult to make informed decisions about marketing and tour planning.",
+      solution: "I designed an intuitive dashboard that aggregates data from multiple streaming services, providing clear visualizations and actionable insights. The interface highlights key metrics while allowing users to drill down into detailed analytics.",
+      results: "The dashboard is now used by over 500 artists and 20 record labels, with users reporting that the insights have directly influenced marketing strategies and resulted in measurable growth in streaming numbers.",
+      image: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      mockups: [
+        "https://images.pexels.com/photos/5054777/pexels-photo-5054777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/5054778/pexels-photo-5054778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/5054779/pexels-photo-5054779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      ]
+    },
+    {
+      title: "Real Estate Platform",
+      slug: "real-estate-platform",
+      client: "Urban Homes",
+      year: "2022",
+      category: "Web Application",
+      description: "A comprehensive real estate platform that transforms the home buying and renting experience through intuitive search, virtual tours, and streamlined transactions.",
+      challenge: "The traditional real estate process was fragmented, requiring users to switch between multiple tools and services to complete their home search and purchase.",
+      solution: "I designed an end-to-end platform that integrates property search, virtual viewings, neighborhood data, financing options, and transaction management in one seamless experience. The design focuses on clarity, trust-building, and reducing friction throughout the user journey.",
+      results: "The platform has facilitated over 1,200 transactions in its first year, with users spending 45% more time on the site compared to competitors and a 30% higher conversion rate from search to inquiry.",
+      image: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      mockups: [
+        "https://images.pexels.com/photos/5054780/pexels-photo-5054780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/5054781/pexels-photo-5054781.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/5054782/pexels-photo-5054782.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      ]
+    }
+  ];
+  
+  return projects.map(project => {
+    return {
+      params: { slug: project.slug },
+      props: { project }
+    };
+  });
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={`${project.title} - James`} description={project.description}>
+  <section class="project-hero section">
+    <div class="container">
+      <div class="project-header fade-in">
+        <a href="/work" class="back-link">← Back to Projects</a>
+        <h1 class="project-title">{project.title}</h1>
+        <p class="project-subtitle">{project.category}</p>
+      </div>
+      
+      <div class="project-hero-image fade-in">
+        <img src={project.image} alt={project.title} />
+      </div>
+    </div>
+  </section>
+  
+  <section class="project-overview section">
+    <div class="container">
+      <div class="project-overview-grid">
+        <div class="project-description fade-in">
+          <h2>Overview</h2>
+          <p>{project.description}</p>
+        </div>
+        
+        <div class="project-meta fade-in">
+          <div class="meta-item">
+            <h3>Client</h3>
+            <p>{project.client}</p>
+          </div>
+          
+          <div class="meta-item">
+            <h3>Year</h3>
+            <p>{project.year}</p>
+          </div>
+          
+          <div class="meta-item">
+            <h3>Category</h3>
+            <p>{project.category}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="project-details section">
+    <div class="container">
+      <div class="project-challenge fade-in">
+        <h2>The Challenge</h2>
+        <p>{project.challenge}</p>
+      </div>
+      
+      <div class="project-solution fade-in">
+        <h2>The Solution</h2>
+        <p>{project.solution}</p>
+      </div>
+      
+      <div class="project-results fade-in">
+        <h2>The Results</h2>
+        <p>{project.results}</p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="project-mockups section">
+    <div class="container">
+      <h2 class="mockups-title fade-in">Project Mockups</h2>
+      
+      <div class="mockups-grid fade-in">
+        {project.mockups.map((mockup) => (
+          <div class="mockup-item">
+            <img src={mockup} alt="Project mockup" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <section class="next-project-section section">
+    <div class="container">
+      <h2 class="next-title fade-in">Next Project</h2>
+      <a href="/work" class="next-link fade-in">
+        View more projects
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </section>
+  
+  <ContactCTA />
+</Layout>
+
+<style>
+  .project-hero {
+    padding-top: var(--space-9);
+  }
+  
+  .project-header {
+    text-align: center;
+    margin-bottom: var(--space-7);
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-bottom: var(--space-4);
+    color: var(--color-secondary);
+    transition: color var(--transition-standard);
+  }
+  
+  .back-link:hover {
+    color: var(--color-accent);
+  }
+  
+  .project-title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    margin-bottom: var(--space-3);
+  }
+  
+  .project-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-secondary);
+  }
+  
+  .project-hero-image {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  .project-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .project-overview-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-6);
+    align-items: start;
+  }
+  
+  .project-description h2,
+  .project-challenge h2,
+  .project-solution h2,
+  .project-results h2,
+  .mockups-title,
+  .next-title {
+    margin-bottom: var(--space-4);
+  }
+  
+  .project-description p,
+  .project-challenge p,
+  .project-solution p,
+  .project-results p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-secondary);
+  }
+  
+  .project-meta {
+    background-color: var(--color-muted);
+    padding: var(--space-5);
+    border-radius: 12px;
+  }
+  
+  .meta-item {
+    margin-bottom: var(--space-4);
+  }
+  
+  .meta-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  .meta-item h3 {
+    font-size: 1rem;
+    margin-bottom: var(--space-2);
+    color: var(--color-secondary);
+  }
+  
+  .meta-item p {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+  
+  .project-challenge,
+  .project-solution,
+  .project-results {
+    max-width: 800px;
+    margin: 0 auto var(--space-7);
+  }
+  
+  .mockups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-5);
+  }
+  
+  .mockup-item {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s var(--transition-bounce);
+  }
+  
+  .mockup-item:hover {
+    transform: translateY(-8px);
+  }
+  
+  .next-project-section {
+    text-align: center;
+  }
+  
+  .next-title {
+    font-size: 1.25rem;
+    color: var(--color-secondary);
+    margin-bottom: var(--space-3);
+  }
+  
+  .next-link {
+    font-size: 2rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    transition: color var(--transition-standard);
+  }
+  
+  .next-link:hover {
+    color: var(--color-accent);
+  }
+  
+  .arrow {
+    margin-left: var(--space-3);
+    transition: transform var(--transition-standard);
+  }
+  
+  .next-link:hover .arrow {
+    transform: translateX(8px);
+  }
+  
+  @media (max-width: 768px) {
+    .project-overview-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+    
+    .project-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+    }
+    
+    .meta-item {
+      margin-bottom: 0;
+    }
+    
+    .mockups-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .project-meta {
+      grid-template-columns: 1fr;
+    }
+    
+    .meta-item {
+      margin-bottom: var(--space-3);
+    }
+    
+    .meta-item:last-child {
+      margin-bottom: 0;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  
+  gsap.registerPlugin(ScrollTrigger);
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    fadeElements.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { 
+          opacity: 0,
+          y: 30
+        },
+        { 
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+  });
+</script>

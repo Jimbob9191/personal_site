@@ -1,0 +1,279 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact - James" description="Get in touch with James, a UX/UI Designer and Product Manager for your next project.">
+  <section class="contact-hero section">
+    <div class="container">
+      <h1 class="contact-title fade-in">Let's Talk</h1>
+      <p class="contact-description fade-in">
+        Have a project in mind or just want to say hello? I'd love to hear from you.
+      </p>
+    </div>
+  </section>
+  
+  <section class="contact-section section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info fade-in">
+          <h2 class="info-title">Contact Information</h2>
+          <p class="info-text">Feel free to reach out through any of these channels:</p>
+          
+          <div class="info-items">
+            <div class="info-item">
+              <div class="info-icon">📧</div>
+              <div class="info-content">
+                <h3>Email</h3>
+                <a href="mailto:hello@james.design">hello@james.design</a>
+              </div>
+            </div>
+            
+            <div class="info-item">
+              <div class="info-icon">📱</div>
+              <div class="info-content">
+                <h3>Phone</h3>
+                <a href="tel:+1234567890">+1 (234) 567-890</a>
+              </div>
+            </div>
+            
+            <div class="info-item">
+              <div class="info-icon">🔗</div>
+              <div class="info-content">
+                <h3>Social</h3>
+                <div class="social-links">
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+                  <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer">Dribbble</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form-container fade-in">
+          <form class="contact-form" id="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-button">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .contact-hero {
+    padding-top: var(--space-10);
+    text-align: center;
+  }
+  
+  .contact-title {
+    font-size: clamp(2.5rem, 10vw, 5rem);
+    margin-bottom: var(--space-4);
+  }
+  
+  .contact-description {
+    font-size: 1.25rem;
+    color: var(--color-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .contact-section {
+    padding-top: 0;
+  }
+  
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .info-title {
+    margin-bottom: var(--space-5);
+  }
+  
+  .info-text {
+    font-size: 1.125rem;
+    color: var(--color-secondary);
+    margin-bottom: var(--space-5);
+  }
+  
+  .info-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  
+  .info-item {
+    display: flex;
+    gap: var(--space-4);
+  }
+  
+  .info-icon {
+    font-size: 2rem;
+  }
+  
+  .info-content h3 {
+    margin: 0 0 var(--space-2) 0;
+    font-size: 1.25rem;
+  }
+  
+  .info-content a {
+    color: var(--color-accent);
+    transition: color var(--transition-standard);
+  }
+  
+  .info-content a:hover {
+    text-decoration: underline;
+  }
+  
+  .social-links {
+    display: flex;
+    gap: var(--space-3);
+  }
+  
+  .contact-form {
+    background-color: white;
+    padding: var(--space-6);
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+  }
+  
+  .form-group {
+    margin-bottom: var(--space-4);
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-weight: 500;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: var(--space-3);
+    border: 1px solid var(--color-muted);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color var(--transition-standard);
+    resize: vertical;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(77, 97, 252, 0.2);
+  }
+  
+  .submit-button {
+    display: inline-block;
+    padding: var(--space-3) var(--space-6);
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-standard);
+  }
+  
+  .submit-button:hover {
+    background-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    
+    .info-item {
+      gap: var(--space-3);
+    }
+    
+    .social-links {
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  
+  gsap.registerPlugin(ScrollTrigger);
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    fadeElements.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { 
+          opacity: 0,
+          y: 30
+        },
+        { 
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+    
+    // Form submission handling
+    const contactForm = document.getElementById('contact-form');
+    
+    contactForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Get form values
+      const name = (document.getElementById('name') as HTMLInputElement).value;
+      const email = (document.getElementById('email') as HTMLInputElement).value;
+      const subject = (document.getElementById('subject') as HTMLInputElement).value;
+      const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+      
+      // In a real implementation, you would send these values to a server
+      console.log({ name, email, subject, message });
+      
+      // Show success message (in a real implementation)
+      alert('Thank you for your message! I will get back to you soon.');
+      
+      // Reset form
+      contactForm.reset();
+    });
+  });
+</script>

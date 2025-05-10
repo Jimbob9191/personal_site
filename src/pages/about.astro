@@ -1,0 +1,344 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Skills from '../components/Skills.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+
+const experiences = [
+  {
+    role: "Lead Product Designer",
+    company: "TechCorp Inc.",
+    period: "2021 - Present",
+    description: "Leading design for flagship products, collaborating with cross-functional teams to deliver exceptional user experiences."
+  },
+  {
+    role: "Senior UX/UI Designer",
+    company: "DigitalWave",
+    period: "2018 - 2021",
+    description: "Designed interfaces for mobile and web applications, conducted user research, and created user flows and wireframes."
+  },
+  {
+    role: "UI Designer",
+    company: "CreativeStudio",
+    period: "2016 - 2018",
+    description: "Crafted visually appealing interfaces for various digital products, ensuring brand consistency and usability."
+  }
+];
+
+const education = [
+  {
+    degree: "Master's in Human-Computer Interaction",
+    institution: "Stanford University",
+    year: "2016"
+  },
+  {
+    degree: "Bachelor's in Graphic Design",
+    institution: "Rhode Island School of Design",
+    year: "2014"
+  }
+];
+---
+
+<Layout title="About - James" description="Learn more about James, a UX/UI Designer and Product Manager specializing in creating user-centered digital experiences.">
+  <section class="about-hero section">
+    <div class="container">
+      <h1 class="about-title fade-in">About Me</h1>
+      
+      <div class="about-grid">
+        <div class="about-content">
+          <p class="about-intro fade-in">
+            Hi there! I'm James, a passionate UX/UI designer and product manager with a mission to create digital experiences that make people's lives better.
+          </p>
+          
+          <p class="about-description fade-in">
+            With over 8 years of experience in the design industry, I've had the opportunity to work with startups, agencies, and established brands across various sectors including finance, healthcare, and e-commerce.
+          </p>
+          
+          <p class="about-description fade-in">
+            My approach to design is holistic – I believe that great products emerge at the intersection of user needs, business goals, and technological possibilities. I'm committed to creating solutions that not only look beautiful but also solve real problems and deliver measurable results.
+          </p>
+          
+          <p class="about-description fade-in">
+            When I'm not designing, you can find me exploring new hiking trails, experimenting with photography, or diving into the latest books on design and technology.
+          </p>
+        </div>
+        
+        <div class="about-image-container fade-in">
+          <img 
+            src="https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+            alt="James profile" 
+            class="about-image"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="experience-section section">
+    <div class="container">
+      <h2 class="section-title fade-in">Experience</h2>
+      
+      <div class="timeline">
+        {experiences.map((experience, index) => (
+          <div class="timeline-item fade-in" style={`--delay: ${index * 0.1}s`}>
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3 class="timeline-title">{experience.role}</h3>
+                <span class="timeline-period">{experience.period}</span>
+              </div>
+              <h4 class="timeline-company">{experience.company}</h4>
+              <p class="timeline-description">{experience.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <h2 class="section-title education-title fade-in">Education</h2>
+      
+      <div class="education-grid">
+        {education.map((item, index) => (
+          <div class="education-item fade-in" style={`--delay: ${index * 0.1}s`}>
+            <div class="education-year">{item.year}</div>
+            <div class="education-details">
+              <h3 class="education-degree">{item.degree}</h3>
+              <div class="education-institution">{item.institution}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <Skills />
+  
+  <ContactCTA />
+</Layout>
+
+<style>
+  .about-hero {
+    padding-top: var(--space-10);
+  }
+  
+  .about-title {
+    font-size: clamp(2.5rem, 10vw, 5rem);
+    margin-bottom: var(--space-8);
+    text-align: center;
+  }
+  
+  .about-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-7);
+    align-items: center;
+  }
+  
+  .about-intro {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-weight: 500;
+    margin-bottom: var(--space-5);
+    color: var(--color-primary);
+  }
+  
+  .about-description {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-4);
+    color: var(--color-secondary);
+  }
+  
+  .about-image-container {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transform: scale(1.05);
+    transition: transform 0.8s ease;
+  }
+  
+  .about-image-container:hover .about-image {
+    transform: scale(1);
+  }
+  
+  .section-title {
+    text-align: center;
+    margin-bottom: var(--space-7);
+  }
+  
+  .education-title {
+    margin-top: var(--space-8);
+  }
+  
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 40px;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 7px;
+    width: 2px;
+    background-color: var(--color-muted);
+  }
+  
+  .timeline-item {
+    position: relative;
+    margin-bottom: var(--space-6);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: itemFadeIn 0.5s ease forwards;
+    animation-delay: var(--delay, 0s);
+  }
+  
+  @keyframes itemFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    top: 6px;
+    left: -40px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    box-shadow: 0 0 0 4px white;
+    z-index: 1;
+  }
+  
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-2);
+  }
+  
+  .timeline-title {
+    font-size: 1.35rem;
+    margin: 0;
+  }
+  
+  .timeline-period {
+    font-size: 0.875rem;
+    color: var(--color-secondary);
+    background-color: var(--color-muted);
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  
+  .timeline-company {
+    font-size: 1.1rem;
+    margin-bottom: var(--space-2);
+    font-weight: 400;
+    color: var(--color-secondary);
+  }
+  
+  .timeline-description {
+    color: var(--color-secondary);
+  }
+  
+  .education-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .education-item {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    border-radius: 8px;
+    background-color: var(--color-muted);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: itemFadeIn 0.5s ease forwards;
+    animation-delay: var(--delay, 0s);
+  }
+  
+  .education-year {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    white-space: nowrap;
+  }
+  
+  .education-degree {
+    font-size: 1.1rem;
+    margin: 0 0 var(--space-2) 0;
+  }
+  
+  .education-institution {
+    color: var(--color-secondary);
+  }
+  
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+    
+    .about-image-container {
+      order: -1;
+      margin-bottom: var(--space-5);
+    }
+    
+    .education-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .timeline-header {
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    
+    .timeline-period {
+      align-self: flex-start;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  
+  gsap.registerPlugin(ScrollTrigger);
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    fadeElements.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { 
+          opacity: 0,
+          y: 30
+        },
+        { 
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+  });
+</script>

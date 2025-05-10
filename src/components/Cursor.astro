@@ -1,0 +1,80 @@
+---
+---
+
+<div class="cursor">
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cursor = document.querySelector('.cursor');
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+    
+    if (!cursor || !cursorDot || !cursorOutline) return;
+    
+    // Check if device has hover capability (non-touch)
+    const hasHover = window.matchMedia('(hover: hover)').matches;
+    
+    if (!hasHover) {
+      cursor.style.display = 'none';
+      return;
+    }
+    
+    document.documentElement.classList.add('has-custom-cursor');
+    
+    let cursorVisible = false;
+    let cursorEnlarged = false;
+    
+    const endX = window.innerWidth / 2;
+    const endY = window.innerHeight / 2;
+    
+    let cursorX = endX;
+    let cursorY = endY;
+    
+    const updateCursor = () => {
+      if (cursorVisible) {
+        cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+      }
+    };
+    
+    document.addEventListener('mousemove', (e) => {
+      cursorVisible = true;
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+      updateCursor();
+    });
+    
+    document.addEventListener('mouseenter', () => {
+      cursorVisible = true;
+      updateCursor();
+    });
+    
+    document.addEventListener('mouseleave', () => {
+      cursorVisible = false;
+      cursor.style.opacity = '0';
+    });
+    
+    // Interactive elements
+    const interactables = document.querySelectorAll('a, button, input, .interactive');
+    
+    interactables.forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        cursorEnlarged = true;
+        cursorDot.style.width = '12px';
+        cursorDot.style.height = '12px';
+        cursorOutline.style.width = '60px';
+        cursorOutline.style.height = '60px';
+      });
+      
+      el.addEventListener('mouseleave', () => {
+        cursorEnlarged = false;
+        cursorDot.style.width = '8px';
+        cursorDot.style.height = '8px';
+        cursorOutline.style.width = '40px';
+        cursorOutline.style.height = '40px';
+      });
+    });
+  });
+</script>

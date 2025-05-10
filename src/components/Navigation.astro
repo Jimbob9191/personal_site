@@ -1,0 +1,344 @@
+---
+---
+
+<nav class="nav">
+  <div class="nav-header">
+    <a href="/" class="nav-logo">james.</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu">
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+    </button>
+  </div>
+  
+  <div class="nav-overlay">
+    <div class="nav-content">
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a href="/" class="nav-link">
+            <span class="nav-number">(01)</span>
+            <span class="nav-text">Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/about" class="nav-link">
+            <span class="nav-number">(02)</span>
+            <span class="nav-text">About Me</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/work" class="nav-link">
+            <span class="nav-number">(03)</span>
+            <span class="nav-text">Works</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/contact" class="nav-link">
+            <span class="nav-number">(04)</span>
+            <span class="nav-text">Contact</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="nav-footer">
+        <div class="nav-social">
+          <h3>Follow me.</h3>
+          <div class="nav-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="nav-social-link">
+              INSTAGRAM
+              <span class="arrow">→</span>
+            </a>
+            <a href="https://behance.net" target="_blank" rel="noopener noreferrer" class="nav-social-link">
+              BEHANCE
+              <span class="arrow">→</span>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="nav-social-link">
+              TWITTER
+              <span class="arrow">→</span>
+            </a>
+            <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" class="nav-social-link">
+              DRIBBBLE
+              <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="nav-newsletter">
+          <h3>Stay connected w/ me.</h3>
+          <form class="nav-form">
+            <div class="nav-form-group">
+              <input type="email" placeholder="Enter your email" required class="nav-input">
+              <button type="submit" class="nav-submit">
+                <span class="arrow">→</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: var(--z-nav);
+  }
+  
+  .nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-5);
+    position: relative;
+    z-index: calc(var(--z-nav) + 1);
+  }
+  
+  .nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .nav-toggle-line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text);
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .nav-toggle.active .nav-toggle-line {
+    background-color: white;
+  }
+  
+  .nav-toggle.active .nav-toggle-line:first-child {
+    transform: translateY(9px) rotate(45deg);
+  }
+  
+  .nav-toggle.active .nav-toggle-line:last-child {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+  
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--nav-background);
+    color: var(--nav-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    padding: var(--space-6);
+    overflow-y: auto;
+    z-index: var(--z-nav);
+  }
+  
+  .nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .nav-content {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding-top: var(--space-9);
+  }
+  
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-item {
+    margin-bottom: var(--space-4);
+    overflow: hidden;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    font-size: clamp(2rem, 8vw, 4.5rem);
+    font-weight: 700;
+    position: relative;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  
+  .nav-overlay.active .nav-link {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: calc(0.1s * var(--index, 0));
+  }
+  
+  .nav-number {
+    font-size: 1rem;
+    opacity: 0.6;
+    margin-right: var(--space-4);
+  }
+  
+  .nav-text {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .nav-text::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--nav-text);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover .nav-text::after {
+    width: 100%;
+  }
+  
+  .nav-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition-delay: 0.4s;
+  }
+  
+  .nav-overlay.active .nav-footer {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .nav-social h3,
+  .nav-newsletter h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: var(--space-4);
+    opacity: 0.7;
+  }
+  
+  .nav-social-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  
+  .nav-social-link {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-social-link:hover {
+    color: var(--color-accent);
+  }
+  
+  .arrow {
+    margin-left: var(--space-2);
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .nav-social-link:hover .arrow {
+    transform: translateX(5px);
+  }
+  
+  .nav-form-group {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .nav-input {
+    background: transparent;
+    border: none;
+    padding: var(--space-2) 0;
+    color: var(--nav-text);
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+  }
+  
+  .nav-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .nav-submit {
+    background: transparent;
+    border: none;
+    color: var(--nav-text);
+    padding: var(--space-2);
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .nav-footer {
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    
+    .nav-social-links {
+      margin-bottom: var(--space-5);
+    }
+    
+    .nav-link {
+      font-size: clamp(1.5rem, 10vw, 3rem);
+    }
+  }
+</style>
+
+<script>
+  // Navigation toggle functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navOverlay = document.querySelector('.nav-overlay');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navToggle?.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navOverlay?.classList.toggle('active');
+      document.body.classList.toggle('nav-open');
+      
+      // Set sequential animation for nav items
+      navLinks.forEach((link, index) => {
+        link.style.setProperty('--index', index);
+      });
+    });
+    
+    // Close navigation when clicking on links
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle?.classList.remove('active');
+        navOverlay?.classList.remove('active');
+        document.body.classList.remove('nav-open');
+      });
+    });
+  });
+</script>

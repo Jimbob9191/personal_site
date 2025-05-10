@@ -1,0 +1,252 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+
+// Sample projects - in a real implementation, these would come from a CMS or data file
+const projects = [
+  {
+    title: "Finance App Redesign",
+    category: "UX/UI Design",
+    image: "https://images.pexels.com/photos/6804581/pexels-photo-6804581.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    slug: "finance-app"
+  },
+  {
+    title: "E-commerce Website",
+    category: "Web Design & Development",
+    image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    slug: "ecommerce-website"
+  },
+  {
+    title: "Health & Wellness Platform",
+    category: "Product Design",
+    image: "https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    slug: "health-platform"
+  },
+  {
+    title: "Travel Booking App",
+    category: "Mobile App Design",
+    image: "https://images.pexels.com/photos/2007401/pexels-photo-2007401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    slug: "travel-app"
+  },
+  {
+    title: "Music Streaming Dashboard",
+    category: "Dashboard Design",
+    image: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    slug: "music-dashboard"
+  },
+  {
+    title: "Real Estate Platform",
+    category: "Web Application",
+    image: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    slug: "real-estate-platform"
+  }
+];
+
+const categories = [...new Set(projects.map(project => project.category))];
+---
+
+<Layout title="Work - James" description="Explore James's portfolio of UX/UI design and product management projects.">
+  <section class="work-hero section">
+    <div class="container">
+      <h1 class="work-title fade-in">My Work</h1>
+      <p class="work-description fade-in">
+        A collection of my recent projects spanning UX/UI design, product management, and digital experiences.
+      </p>
+      
+      <div class="work-filters fade-in">
+        <button class="filter-button active" data-filter="all">All</button>
+        {categories.map(category => (
+          <button class="filter-button" data-filter={category}>{category}</button>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <section class="projects-section section">
+    <div class="container">
+      <div class="projects-grid" id="projects-grid">
+        {projects.map((project, index) => (
+          <div class="project-item" data-category={project.category}>
+            <ProjectCard
+              title={project.title}
+              category={project.category}
+              image={project.image}
+              slug={project.slug}
+              index={index}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <ContactCTA />
+</Layout>
+
+<style>
+  .work-hero {
+    padding-top: var(--space-10);
+    text-align: center;
+  }
+  
+  .work-title {
+    font-size: clamp(2.5rem, 10vw, 5rem);
+    margin-bottom: var(--space-4);
+  }
+  
+  .work-description {
+    font-size: 1.25rem;
+    color: var(--color-secondary);
+    max-width: 700px;
+    margin: 0 auto var(--space-7);
+  }
+  
+  .work-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-7);
+  }
+  
+  .filter-button {
+    background-color: transparent;
+    border: 1px solid var(--color-muted);
+    padding: var(--space-2) var(--space-4);
+    border-radius: 30px;
+    font-size: 0.875rem;
+    transition: all var(--transition-standard);
+    cursor: pointer;
+  }
+  
+  .filter-button:hover {
+    background-color: var(--color-muted);
+  }
+  
+  .filter-button.active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-5);
+  }
+  
+  .projects-section {
+    padding-top: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .work-filters {
+      gap: var(--space-2);
+    }
+    
+    .filter-button {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+    }
+    
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  
+  gsap.registerPlugin(ScrollTrigger);
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    // Animations
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    fadeElements.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { 
+          opacity: 0,
+          y: 30
+        },
+        { 
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+    
+    // Project filtering
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const projectItems = document.querySelectorAll('.project-item');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        const filter = button.dataset.filter;
+        
+        // Filter projects
+        projectItems.forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            gsap.to(item, { 
+              opacity: 1, 
+              scale: 1, 
+              duration: 0.4,
+              ease: 'power1.out',
+              onComplete: () => {
+                item.style.display = 'block';
+              }
+            });
+          } else {
+            gsap.to(item, { 
+              opacity: 0, 
+              scale: 0.9, 
+              duration: 0.4,
+              ease: 'power1.out',
+              onComplete: () => {
+                item.style.display = 'none';
+              }
+            });
+          }
+        });
+      });
+    });
+    
+    // Animation for project cards
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    projectCards.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { 
+          opacity: 0,
+          y: 30
+        },
+        { 
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: index * 0.1,
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 90%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+  });
+</script>

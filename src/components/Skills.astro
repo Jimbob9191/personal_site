@@ -1,0 +1,165 @@
+---
+const skills = [
+  {
+    title: "UX/UI Designs",
+    items: [
+      "User Research and Analysis",
+      "Wireframing and Prototyping",
+      "User Interface Design",
+      "User Experience Testing",
+      "Responsive Design Solutions"
+    ]
+  },
+  {
+    title: "Product Management",
+    items: [
+      "Product Strategy",
+      "Roadmap Planning",
+      "User Story Mapping",
+      "Sprint Planning",
+      "Product Analytics"
+    ]
+  },
+  {
+    title: "Mobile",
+    items: [
+      "iOS App Design",
+      "Android App Design",
+      "Mobile-First Design",
+      "App Prototyping",
+      "Cross-Platform Design"
+    ]
+  },
+  {
+    title: "Branding",
+    items: [
+      "Brand Strategy",
+      "Visual Identity Design",
+      "Brand Guidelines",
+      "Logo Design",
+      "Marketing Collateral"
+    ]
+  }
+];
+---
+
+<section class="skills-section section">
+  <div class="container">
+    <div class="skills-accordion">
+      {skills.map((skill, index) => (
+        <div class="accordion-item">
+          <button class="accordion-header" data-index={index}>
+            <span class="title">{skill.title}</span>
+            <span class="accordion-icon">↓</span>
+          </button>
+          <div class="accordion-content">
+            <ul class="skill-list">
+              {skill.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-accordion {
+    width: 100%;
+  }
+  
+  .accordion-item {
+    border-bottom: 1px solid var(--color-muted);
+  }
+  
+  .accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-6) 0;
+    text-align: left;
+    transition: all var(--transition-standard);
+  }
+  
+  .accordion-header .title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  
+  .accordion-icon {
+    font-size: 1.5rem;
+    transition: transform var(--transition-standard);
+  }
+  
+  .accordion-header[aria-expanded="true"] .accordion-icon {
+    transform: rotate(180deg);
+  }
+  
+  .accordion-content {
+    height: 0;
+    overflow: hidden;
+    transition: height var(--transition-standard);
+  }
+  
+  .skill-list {
+    list-style: none;
+    padding: 0 0 var(--space-6);
+  }
+  
+  .skill-list li {
+    font-size: 1.25rem;
+    color: var(--color-secondary);
+    margin-bottom: var(--space-4);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  
+  @media (max-width: 768px) {
+    .accordion-header {
+      padding: var(--space-5) 0;
+    }
+    
+    .skill-list li {
+      font-size: 1.125rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach((header) => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling as HTMLElement;
+        const isExpanded = header.getAttribute('aria-expanded') === 'true';
+        
+        // Close all other accordion items
+        accordionHeaders.forEach((otherHeader) => {
+          if (otherHeader !== header) {
+            otherHeader.setAttribute('aria-expanded', 'false');
+            const otherContent = otherHeader.nextElementSibling as HTMLElement;
+            otherContent.style.height = '0';
+          }
+        });
+        
+        // Toggle current accordion item
+        header.setAttribute('aria-expanded', (!isExpanded).toString());
+        content.style.height = !isExpanded ? `${content.scrollHeight}px` : '0';
+      });
+    });
+    
+    // Open second accordion item by default (UX/UI Designs)
+    const secondHeader = accordionHeaders[0];
+    if (secondHeader) {
+      secondHeader.setAttribute('aria-expanded', 'true');
+      const secondContent = secondHeader.nextElementSibling as HTMLElement;
+      secondContent.style.height = `${secondContent.scrollHeight}px`;
+    }
+  });
+</script>
