@@ -14,13 +14,13 @@ const currentYear = new Date().getFullYear();
     <div class="footer-bottom">
       <div class="footer-contact">
         <a href="mailto:jamesmolyneuxbirch@gmail.com" class="footer-link">jamesmolyneuxbirch@gmail.com</a>
-      </div>
-      
-      <div class="footer-social">
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a href="https://behance.net" target="_blank" rel="noopener noreferrer">Behance</a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
-        <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer">Dribbble</a>
+        
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://behance.net" target="_blank" rel="noopener noreferrer">Behance</a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer">Dribbble</a>
+        </div>
       </div>
     </div>
   </div>
@@ -59,11 +59,16 @@ const currentYear = new Date().getFullYear();
   }
   
   .footer-bottom {
+    padding-top: var(--space-5);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .footer-contact {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: var(--space-5);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+    gap: var(--space-4);
   }
   
   .footer-social {
@@ -88,9 +93,9 @@ const currentYear = new Date().getFullYear();
       gap: var(--space-4);
     }
     
-    .footer-bottom {
+    .footer-contact {
       flex-direction: column;
-      gap: var(--space-4);
+      align-items: center;
       text-align: center;
     }
     
