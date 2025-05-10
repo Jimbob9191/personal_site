@@ -10,21 +10,21 @@ const currentYear = new Date().getFullYear();
         <p>UX/UI Designer & Product Manager</p>
       </div>
       
-      <div class="footer-social">
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a href="https://behance.net" target="_blank" rel="noopener noreferrer">Behance</a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
-        <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer">Dribbble</a>
+      <div class="footer-contact">
+        <a href="mailto:jamesmolyneuxbirch@gmail.com" class="footer-link">jamesmolyneuxbirch@gmail.com</a>
       </div>
     </div>
     
     <div class="footer-bottom">
       <div class="footer-copyright">
-        &copy; {currentYear} James Molyneux-Birch
+        &copy; {currentYear} James Molyneux-Birch. All rights reserved.
       </div>
       
-      <div class="footer-contact">
-        <a href="mailto:jamesmolyneuxbirch@gmail.com" class="footer-link">jamesmolyneuxbirch@gmail.com</a>
+      <div class="footer-social">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://behance.net" target="_blank" rel="noopener noreferrer">Behance</a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+        <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer">Dribbble</a>
       </div>
     </div>
   </div>
@@ -54,19 +54,17 @@ const currentYear = new Date().getFullYear();
     margin-bottom: 0;
   }
   
-  .footer-social {
+  .footer-contact {
     display: flex;
-    gap: var(--space-4);
+    flex-direction: column;
+    gap: var(--space-2);
   }
   
-  .footer-social a {
-    font-size: 0.875rem;
-    opacity: 0.7;
-    transition: opacity 0.3s ease, color 0.3s ease;
+  .footer-link {
+    transition: color 0.3s ease;
   }
   
-  .footer-social a:hover {
-    opacity: 1;
+  .footer-link:hover {
     color: var(--color-accent);
   }
   
@@ -84,15 +82,19 @@ const currentYear = new Date().getFullYear();
     font-size: 0.875rem;
   }
   
-  .footer-contact {
+  .footer-social {
+    display: flex;
+    gap: var(--space-4);
+  }
+  
+  .footer-social a {
     font-size: 0.875rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, color 0.3s ease;
   }
   
-  .footer-link {
-    transition: color 0.3s ease;
-  }
-  
-  .footer-link:hover {
+  .footer-social a:hover {
+    opacity: 1;
     color: var(--color-accent);
   }
   
@@ -101,11 +103,9 @@ const currentYear = new Date().getFullYear();
     .footer-bottom {
       flex-direction: column;
       gap: var(--space-4);
-      text-align: center;
     }
     
     .footer-social {
-      justify-content: center;
       gap: var(--space-3);
       flex-wrap: wrap;
     }
