@@ -94,10 +94,10 @@ const projects = [
     text-align: left;
     margin-bottom: var(--space-7);
     opacity: 0;
-    transform: translateY(100%);
-    filter: blur(20px);
-    animation: slideUpAndClarify 1s var(--transition-bounce) forwards;
-    animation-delay: 2s;
+    transform: translateY(30px);
+    filter: blur(10px);
+    animation: titleReveal 1.2s var(--transition-bounce) forwards;
+    animation-delay: 2.2s;
   }
   
   .projects-grid {
@@ -121,10 +121,15 @@ const projects = [
     justify-content: center;
   }
 
-  @keyframes slideUpAndClarify {
-    to {
-      transform: translateY(0);
+  @keyframes titleReveal {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+      filter: blur(10px);
+    }
+    100% {
       opacity: 1;
+      transform: translateY(0);
       filter: blur(0);
     }
   }
@@ -178,7 +183,7 @@ const projects = [
           opacity: 1,
           y: 0,
           duration: 0.6,
-          delay: index * 0.1,
+          delay: index * 0.1 + 2.4,
           scrollTrigger: {
             trigger: card,
             start: 'top 90%',

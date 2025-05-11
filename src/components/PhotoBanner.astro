@@ -63,9 +63,9 @@ const projects = [
     margin-top: calc(var(--space-6) * -1);
     opacity: 0;
     transform: translateY(30px);
-    filter: blur(20px);
-    animation: fadeInAndClarify 1s ease forwards;
-    animation-delay: 1.8s;
+    filter: blur(10px);
+    animation: bannerReveal 1.2s ease forwards;
+    animation-delay: 2s;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
@@ -76,10 +76,10 @@ const projects = [
     font-size: clamp(2rem, 5vw, 3rem);
     margin-bottom: calc(var(--space-7) * 0.25);
     opacity: 0;
-    transform: translateY(100%);
-    filter: blur(20px);
-    animation: fadeInAndClarify 1s ease forwards;
-    animation-delay: 1.6s;
+    transform: translateY(30px);
+    filter: blur(10px);
+    animation: titleReveal 1.2s var(--transition-bounce) forwards;
+    animation-delay: 1.8s;
   }
 
   .banner-content {
@@ -92,9 +92,10 @@ const projects = [
     display: flex;
     gap: var(--space-4);
     animation: scroll 30s linear infinite;
-    animation-delay: 1s;
+    animation-delay: 2.4s;
     width: max-content;
     padding: var(--space-7) 0;
+    opacity: 0;
   }
 
   .photo-item {
@@ -137,8 +138,26 @@ const projects = [
     );
   }
 
-  @keyframes fadeInAndClarify {
-    to {
+  @keyframes bannerReveal {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+      filter: blur(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes titleReveal {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+      filter: blur(10px);
+    }
+    100% {
       opacity: 1;
       transform: translateY(0);
       filter: blur(0);
@@ -147,9 +166,11 @@ const projects = [
 
   @keyframes scroll {
     0% {
+      opacity: 1;
       transform: translateX(0);
     }
     100% {
+      opacity: 1;
       transform: translateX(-50%);
     }
   }
