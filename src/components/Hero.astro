@@ -31,6 +31,9 @@
     flex-direction: column;
     justify-content: center;
     padding: var(--space-8) 0;
+    opacity: 0;
+    animation: fadeInHero 0.01s linear forwards;
+    will-change: opacity;
   }
   
   .hero-title {
@@ -39,21 +42,17 @@
     margin-bottom: var(--space-4);
     overflow: visible;
     padding: 0.1em 0;
-    opacity: 0;
-    animation: fadeInTitle 0.01s linear forwards;
-    will-change: opacity;
   }
   
   .hero-line {
     display: block;
     transform: translateY(100%);
     opacity: 0;
-    filter: blur(10px);
-    animation: revealLine 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    will-change: transform, opacity, filter;
+    animation: revealLine 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    will-change: transform, opacity;
   }
   
-  @keyframes fadeInTitle {
+  @keyframes fadeInHero {
     to {
       opacity: 1;
     }
@@ -63,12 +62,10 @@
     0% {
       transform: translateY(100%);
       opacity: 0;
-      filter: blur(10px);
     }
     100% {
       transform: translateY(0);
       opacity: 1;
-      filter: blur(0);
     }
   }
   
@@ -76,8 +73,8 @@
     max-width: 800px;
     opacity: 0;
     transform: translateY(20px);
-    animation: revealContent 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    animation-delay: 0.6s;
+    animation: revealContent 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.4s;
     will-change: transform, opacity;
   }
   
@@ -106,8 +103,8 @@
     margin-top: var(--space-7);
     opacity: 0;
     transform: translateY(20px);
-    animation: revealButtons 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    animation-delay: 0.8s;
+    animation: revealButtons 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.6s;
     will-change: transform, opacity;
   }
   
