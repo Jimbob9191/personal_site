@@ -45,13 +45,15 @@
     display: block;
     transform: translateY(100%);
     opacity: 0;
-    animation: slideUp 0.8s var(--transition-bounce) forwards;
+    filter: blur(10px);
+    animation: slideUpAndClarify 0.8s var(--transition-bounce) forwards;
   }
   
-  @keyframes slideUp {
+  @keyframes slideUpAndClarify {
     to {
       transform: translateY(0);
       opacity: 1;
+      filter: blur(0);
     }
   }
   
@@ -59,14 +61,16 @@
     max-width: 800px;
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeIn 0.8s ease forwards;
+    filter: blur(10px);
+    animation: fadeInAndClarify 0.8s ease forwards;
     animation-delay: 0.6s;
   }
   
-  @keyframes fadeIn {
+  @keyframes fadeInAndClarify {
     to {
       opacity: 1;
       transform: translateY(0);
+      filter: blur(0);
     }
   }
   
