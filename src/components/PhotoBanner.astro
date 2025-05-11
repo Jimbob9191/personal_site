@@ -49,6 +49,8 @@ const projects = [
         </a>
       ))}
     </div>
+    <div class="frost-overlay left"></div>
+    <div class="frost-overlay right"></div>
   </div>
 </section>
 
@@ -77,6 +79,7 @@ const projects = [
   .banner-content {
     width: 100%;
     overflow: hidden;
+    position: relative;
   }
 
   .scroll-track {
@@ -98,6 +101,35 @@ const projects = [
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .frost-overlay {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 150px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .frost-overlay.left {
+    left: 0;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0)
+    );
+    backdrop-filter: blur(10px);
+  }
+
+  .frost-overlay.right {
+    right: 0;
+    background: linear-gradient(
+      to left,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0)
+    );
+    backdrop-filter: blur(10px);
   }
 
   @keyframes fadeIn {
