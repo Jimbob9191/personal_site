@@ -3,123 +3,131 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import PhotoBanner from '../components/PhotoBanner.astro';
 import AboutSection from '../components/AboutSection.astro';
-import ProjectCard from '../components/ProjectCard.astro';
 import Skills from '../components/Skills.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 
 const projects = [
   {
-    title: "Finance App Redesign",
-    category: "UX/UI Design",
-    image: "https://images.pexels.com/photos/6804581/pexels-photo-6804581.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    slug: "finance-app"
+    title: "Fannel Fashion",
+    category: "E-commerce",
+    image: "https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg",
+    slug: "fannel-fashion"
   },
   {
-    title: "E-commerce Website",
-    category: "Web Design & Development",
-    image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    slug: "ecommerce-website"
-  },
-  {
-    title: "Health & Wellness Platform",
+    title: "Charf Keyboards",
     category: "Product Design",
-    image: "https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    slug: "health-platform"
+    image: "https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg",
+    slug: "charf-keyboards"
   },
   {
-    title: "Travel Booking App",
-    category: "Mobile App Design",
-    image: "https://images.pexels.com/photos/2007401/pexels-photo-2007401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    slug: "travel-app"
-  },
-  {
-    title: "Music Streaming Dashboard",
-    category: "Dashboard Design",
-    image: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    slug: "music-dashboard"
+    title: "News Morning",
+    category: "Mobile UI",
+    image: "https://images.pexels.com/photos/4386339/pexels-photo-4386339.jpeg",
+    slug: "news-morning"
   }
 ];
 ---
 
 <Layout title="James - UX/UI Designer & Product Manager">
   <Hero />
-  
   <PhotoBanner />
   
   <section class="featured-work section">
     <div class="container">
-      <div class="projects-grid">
-        <div class="project-main">
-          <ProjectCard
-            title={projects[0].title}
-            category={projects[0].category}
-            image={projects[0].image}
-            slug={projects[0].slug}
-            index={0}
-          />
-        </div>
-        
-        <div class="projects-secondary">
-          {projects.slice(1, 5).map((project, index) => (
-            <div class="project-item">
-              <ProjectCard
-                title={project.title}
-                category={project.category}
-                image={project.image}
-                slug={project.slug}
-                index={index + 1}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+      <h2 class="section-title">Featured Projects</h2>
       
-      <div class="projects-action">
-        <a href="/work" class="button">View All Projects</a>
+      <div class="projects-grid">
+        {projects.map((project, index) => (
+          <a href={`/work/${project.slug}`} class="project-card" data-index={index}>
+            <div class="project-image">
+              <img src={project.image} alt={project.title} />
+            </div>
+            <div class="project-info">
+              <h3>{project.title}</h3>
+              <span class="project-category">{project.category}</span>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   </section>
   
   <AboutSection />
-  
   <Skills />
-  
   <ContactCTA />
 </Layout>
 
 <style>
+  .featured-work {
+    padding-top: 0;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    margin-bottom: var(--space-8);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealTitle 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 2.2s;
+    will-change: transform, opacity;
+  }
+
   .projects-grid {
     display: grid;
-    gap: var(--space-8);
-    margin-bottom: var(--space-7);
+    gap: var(--space-6);
     opacity: 0;
     transform: translateY(20px);
-    animation: revealProjects 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 1.8s;
-    will-change: transform, opacity;
-  }
-  
-  .project-main {
-    grid-column: 1 / -1;
-  }
-  
-  .projects-secondary {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-8);
-  }
-  
-  .projects-action {
-    display: flex;
-    justify-content: center;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: revealAction 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 2s;
+    animation: revealGrid 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 2.4s;
     will-change: transform, opacity;
   }
 
-  @keyframes revealProjects {
+  .project-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--color-muted);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .project-image {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  .project-card:hover .project-image img {
+    transform: scale(1.05);
+  }
+
+  .project-info {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .project-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-2);
+  }
+
+  .project-category {
+    color: var(--color-secondary);
+    font-size: 0.875rem;
+  }
+
+  @keyframes revealTitle {
     from {
       opacity: 0;
       transform: translateY(20px);
@@ -130,7 +138,7 @@ const projects = [
     }
   }
 
-  @keyframes revealAction {
+  @keyframes revealGrid {
     from {
       opacity: 0;
       transform: translateY(20px);
@@ -140,43 +148,14 @@ const projects = [
       transform: translateY(0);
     }
   }
-  
-  @media (max-width: 768px) {
-    .projects-secondary {
-      grid-template-columns: 1fr;
+
+  @media (min-width: 768px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-card:first-child {
+      grid-column: 1 / -1;
     }
   }
 </style>
-
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  
-  gsap.registerPlugin(ScrollTrigger);
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    projectCards.forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        { 
-          opacity: 0,
-          y: 30
-        },
-        { 
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: index * 0.15 + 2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 90%',
-            toggleActions: 'play none none none'
-          }
-        }
-      );
-    });
-  });
-</script>
