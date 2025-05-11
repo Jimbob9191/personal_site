@@ -28,9 +28,7 @@ const photos = [
     <div class="scroll-track">
       {[...photos, ...photos].map((photo) => (
         <a href="/gallery" class="photo-item">
-          <div class="photo-wrapper">
-            <img src={photo.url} alt={photo.title} />
-          </div>
+          <img src={photo.url} alt={photo.title} />
         </a>
       ))}
     </div>
@@ -60,24 +58,21 @@ const photos = [
   .photo-item {
     width: 360px;
     height: 240px;
-    transition: transform 0.3s ease;
-  }
-
-  .photo-wrapper {
-    width: 100%;
-    height: 100%;
     border-radius: 8px;
     overflow: hidden;
-  }
-
-  .photo-item:hover {
-    transform: scale(1.05);
+    display: block;
   }
 
   .photo-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+  }
+
+  .photo-item:hover img {
+    transform: scale(1.05);
   }
 
   @keyframes scroll {
