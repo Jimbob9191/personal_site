@@ -1,0 +1,92 @@
+---
+const photos = [
+  {
+    url: "https://images.pexels.com/photos/3987066/pexels-photo-3987066.jpeg",
+    title: "Urban Architecture"
+  },
+  {
+    url: "https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg",
+    title: "Street Photography"
+  },
+  {
+    url: "https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg",
+    title: "Nature"
+  },
+  {
+    url: "https://images.pexels.com/photos/2007401/pexels-photo-2007401.jpeg",
+    title: "Travel"
+  },
+  {
+    url: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg",
+    title: "Urban Life"
+  }
+];
+---
+
+<section class="photo-banner">
+  <div class="banner-content">
+    <div class="scroll-track">
+      {[...photos, ...photos].map((photo) => (
+        <a href="/gallery" class="photo-item">
+          <img src={photo.url} alt={photo.title} />
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .photo-banner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: var(--space-6) 0;
+    background-color: var(--color-muted);
+  }
+
+  .banner-content {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .scroll-track {
+    display: flex;
+    gap: var(--space-4);
+    animation: scroll 30s linear infinite;
+    width: max-content;
+  }
+
+  .photo-item {
+    width: 300px;
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .photo-item:hover {
+    transform: scale(1.05);
+  }
+
+  .photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .photo-item {
+      width: 250px;
+      height: 166px;
+    }
+  }
+</style>
