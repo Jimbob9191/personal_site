@@ -4,36 +4,31 @@ const projects = [
     url: "https://images.pexels.com/photos/3987066/pexels-photo-3987066.jpeg",
     title: "Finance App Redesign",
     slug: "finance-app",
-    width: "480px",
-    height: "360px"
+    width: "480px"
   },
   {
     url: "https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg",
     title: "E-commerce Website",
     slug: "ecommerce-website",
-    width: "360px",
-    height: "480px"
+    width: "360px"
   },
   {
     url: "https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg",
     title: "Health & Wellness Platform",
     slug: "health-platform",
-    width: "480px",
-    height: "360px"
+    width: "480px"
   },
   {
     url: "https://images.pexels.com/photos/2007401/pexels-photo-2007401.jpeg",
     title: "Travel Booking App",
     slug: "travel-app",
-    width: "360px",
-    height: "480px"
+    width: "360px"
   },
   {
     url: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg",
     title: "Music Streaming Dashboard",
     slug: "music-dashboard",
-    width: "480px",
-    height: "360px"
+    width: "480px"
   }
 ];
 ---
@@ -45,7 +40,7 @@ const projects = [
         <a 
           href={`/work/${project.slug}`} 
           class="photo-item"
-          style={`width: ${project.width}; height: ${project.height};`}
+          style={`width: ${project.width};`}
         >
           <img src={project.url} alt={project.title} />
         </a>
@@ -84,6 +79,7 @@ const projects = [
     border-radius: 8px;
     overflow: hidden;
     display: block;
+    height: 360px;
   }
 
   .photo-item img {
@@ -111,7 +107,7 @@ const projects = [
   @media (max-width: 768px) {
     .photo-item {
       width: 300px !important;
-      height: 400px !important;
+      height: 360px !important;
     }
   }
 </style>
