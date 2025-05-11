@@ -46,11 +46,17 @@
     transform: translateY(100%);
     opacity: 0;
     filter: blur(10px);
-    animation: slideUpAndClarify 0.8s var(--transition-bounce) forwards;
+    animation: slideUpAndClarify 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity, filter;
   }
   
   @keyframes slideUpAndClarify {
-    to {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+      filter: blur(10px);
+    }
+    100% {
       transform: translateY(0);
       opacity: 1;
       filter: blur(0);
@@ -62,12 +68,18 @@
     opacity: 0;
     transform: translateY(20px);
     filter: blur(10px);
-    animation: fadeInAndClarify 0.8s ease forwards;
-    animation-delay: 0.6s;
+    animation: fadeInAndClarify 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.8s;
+    will-change: transform, opacity, filter;
   }
   
   @keyframes fadeInAndClarify {
-    to {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(10px);
+    }
+    100% {
       opacity: 1;
       transform: translateY(0);
       filter: blur(0);
@@ -86,6 +98,22 @@
     gap: var(--space-4);
     flex-wrap: wrap;
     margin-top: var(--space-7);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInButtons 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 1s;
+    will-change: transform, opacity;
+  }
+
+  @keyframes fadeInButtons {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   @media (max-width: 768px) {
