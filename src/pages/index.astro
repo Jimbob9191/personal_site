@@ -48,8 +48,6 @@ const projects = [
   
   <section class="featured-work section">
     <div class="container">
-      <h2 class="section-title">Featured Work</h2>
-      
       <div class="projects-grid">
         <div class="project-main">
           <ProjectCard
@@ -90,16 +88,6 @@ const projects = [
 </Layout>
 
 <style>
-  .section-title {
-    text-align: left;
-    margin-bottom: var(--space-7);
-    opacity: 0;
-    transform: translateY(30px);
-    animation: revealTitle 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 1.6s;
-    will-change: transform, opacity;
-  }
-  
   .projects-grid {
     display: grid;
     gap: var(--space-8);
@@ -129,17 +117,6 @@ const projects = [
     animation: revealAction 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     animation-delay: 2s;
     will-change: transform, opacity;
-  }
-
-  @keyframes revealTitle {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   @keyframes revealProjects {
