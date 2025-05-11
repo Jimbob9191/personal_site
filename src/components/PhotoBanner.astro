@@ -45,7 +45,12 @@ const projects = [
           class="photo-item"
           style={`width: ${project.width};`}
         >
-          <img src={project.url} alt={project.title} />
+          <img 
+            src={project.url} 
+            alt={project.title}
+            loading="lazy"
+            decoding="async"
+          />
         </a>
       ))}
     </div>
@@ -63,9 +68,8 @@ const projects = [
     margin-top: calc(var(--space-6) * -1);
     opacity: 0;
     transform: translateY(30px);
-    filter: blur(10px);
-    animation: bannerReveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: 1.8s;
+    animation: revealBanner 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 1s;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
@@ -76,10 +80,9 @@ const projects = [
     font-size: clamp(2rem, 5vw, 3rem);
     margin-bottom: calc(var(--space-7) * 0.25);
     opacity: 0;
-    transform: translateY(30px);
-    filter: blur(10px);
-    animation: titleReveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: 1.6s;
+    transform: translateY(20px);
+    animation: revealTitle 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.8s;
   }
 
   .banner-content {
@@ -91,12 +94,18 @@ const projects = [
   .scroll-track {
     display: flex;
     gap: var(--space-4);
-    animation: scrollReveal 30s linear infinite;
-    animation-delay: 2.2s;
+    animation: scroll 30s linear infinite;
+    animation-delay: 1.2s;
+    animation-play-state: paused;
     width: max-content;
     padding: var(--space-7) 0;
     opacity: 0;
     will-change: transform;
+  }
+
+  .scroll-track.loaded {
+    animation-play-state: running;
+    opacity: 1;
   }
 
   .photo-item {
@@ -106,6 +115,7 @@ const projects = [
     height: 360px;
     transform: scale(0.98);
     transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
   }
 
   .photo-item:hover {
@@ -126,8 +136,7 @@ const projects = [
     pointer-events: none;
     z-index: 2;
     opacity: 0;
-    animation: overlayReveal 0.8s ease forwards;
-    animation-delay: 2s;
+    transition: opacity 0.4s ease;
   }
 
   .gradient-overlay.left {
@@ -148,52 +157,31 @@ const projects = [
     );
   }
 
-  @keyframes bannerReveal {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-      filter: blur(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
-  }
-
-  @keyframes titleReveal {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-      filter: blur(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
-  }
-
-  @keyframes scrollReveal {
-    0% {
-      opacity: 0;
-      transform: translateX(0);
-    }
-    2% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(-50%);
-    }
-  }
-
-  @keyframes overlayReveal {
+  @keyframes revealBanner {
     from {
       opacity: 0;
+      transform: translateY(30px);
     }
     to {
       opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes revealTitle {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translateX(-50%);
     }
   }
 
@@ -208,3 +196,32 @@ const projects = [
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollTrack = document.querySelector('.scroll-track');
+    const images = document.querySelectorAll('.photo-item img');
+    const overlays = document.querySelectorAll('.gradient-overlay');
+    
+    let imagesLoaded = 0;
+    const totalImages = images.length;
+
+    function handleImageLoad() {
+      imagesLoaded++;
+      if (imagesLoaded === totalImages) {
+        scrollTrack?.classList.add('loaded');
+        overlays.forEach(overlay => {
+          overlay.style.opacity = '1';
+        });
+      }
+    }
+
+    images.forEach(img => {
+      if (img.complete) {
+        handleImageLoad();
+      } else {
+        img.addEventListener('load', handleImageLoad);
+      }
+    });
+  });
+</script>
