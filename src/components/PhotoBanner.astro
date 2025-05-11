@@ -35,7 +35,10 @@ const projects = [
 
 <section class="photo-banner">
   <div class="container">
-    <h2 class="banner-title">Featured Projects</h2>
+    <div class="banner-header">
+      <h2 class="banner-title">Featured Projects</h2>
+      <a href="/work" class="banner-cta">View All Projects</a>
+    </div>
   </div>
   <div class="banner-content">
     <div class="scroll-track">
@@ -78,14 +81,41 @@ const projects = [
     will-change: transform, opacity;
   }
 
+  .banner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: calc(var(--space-7) * 0.25);
+  }
+
   .banner-title {
     font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: calc(var(--space-7) * 0.25);
     opacity: 0;
     transform: translateY(20px);
     animation: revealTitle 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     animation-delay: 1.2s;
     will-change: transform, opacity;
+  }
+
+  .banner-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-5);
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 30px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealCta 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 1.3s;
+    will-change: transform, opacity;
+    transition: all var(--transition-standard);
+  }
+
+  .banner-cta:hover {
+    background-color: var(--color-accent);
+    transform: translateY(-2px);
   }
 
   .banner-content {
@@ -186,6 +216,17 @@ const projects = [
     }
   }
 
+  @keyframes revealCta {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -202,6 +243,12 @@ const projects = [
   }
 
   @media (max-width: 768px) {
+    .banner-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
     .photo-item {
       width: 300px !important;
       height: 360px !important;
