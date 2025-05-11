@@ -1,24 +1,29 @@
 ---
-const photos = [
+const projects = [
   {
     url: "https://images.pexels.com/photos/3987066/pexels-photo-3987066.jpeg",
-    title: "Urban Architecture"
+    title: "Finance App Redesign",
+    slug: "finance-app"
   },
   {
     url: "https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg",
-    title: "Street Photography"
+    title: "E-commerce Website",
+    slug: "ecommerce-website"
   },
   {
     url: "https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg",
-    title: "Nature"
+    title: "Health & Wellness Platform",
+    slug: "health-platform"
   },
   {
     url: "https://images.pexels.com/photos/2007401/pexels-photo-2007401.jpeg",
-    title: "Travel"
+    title: "Travel Booking App",
+    slug: "travel-app"
   },
   {
     url: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg",
-    title: "Urban Life"
+    title: "Music Streaming Dashboard",
+    slug: "music-dashboard"
   }
 ];
 ---
@@ -26,9 +31,9 @@ const photos = [
 <section class="photo-banner">
   <div class="banner-content">
     <div class="scroll-track">
-      {[...photos, ...photos].map((photo) => (
-        <a href="/gallery" class="photo-item">
-          <img src={photo.url} alt={photo.title} />
+      {[...projects, ...projects].map((project) => (
+        <a href={`/work/${project.slug}`} class="photo-item">
+          <img src={project.url} alt={project.title} />
         </a>
       ))}
     </div>
