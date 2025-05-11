@@ -95,8 +95,9 @@ const projects = [
     margin-bottom: var(--space-7);
     opacity: 0;
     transform: translateY(30px);
-    animation: revealTitle 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: 1.2s;
+    animation: revealTitle 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 1.6s;
+    will-change: transform, opacity;
   }
   
   .projects-grid {
@@ -104,8 +105,10 @@ const projects = [
     gap: var(--space-8);
     margin-bottom: var(--space-7);
     opacity: 0;
-    animation: revealProjects 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: 1.4s;
+    transform: translateY(20px);
+    animation: revealProjects 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 1.8s;
+    will-change: transform, opacity;
   }
   
   .project-main {
@@ -123,8 +126,9 @@ const projects = [
     justify-content: center;
     opacity: 0;
     transform: translateY(20px);
-    animation: revealAction 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: 1.8s;
+    animation: revealAction 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 2s;
+    will-change: transform, opacity;
   }
 
   @keyframes revealTitle {
@@ -141,9 +145,11 @@ const projects = [
   @keyframes revealProjects {
     from {
       opacity: 0;
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
+      transform: translateY(0);
     }
   }
 
@@ -184,8 +190,9 @@ const projects = [
         { 
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          delay: index * 0.1 + 1.6,
+          duration: 0.8,
+          delay: index * 0.15 + 2,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: card,
             start: 'top 90%',

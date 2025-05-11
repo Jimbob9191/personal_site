@@ -50,6 +50,7 @@ const projects = [
             alt={project.title}
             loading="lazy"
             decoding="async"
+            fetchpriority="low"
           />
         </a>
       ))}
@@ -68,12 +69,13 @@ const projects = [
     margin-top: calc(var(--space-6) * -1);
     opacity: 0;
     transform: translateY(30px);
-    animation: revealBanner 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: 1s;
+    animation: revealBanner 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 1.4s;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
+    will-change: transform, opacity;
   }
 
   .banner-title {
@@ -81,31 +83,32 @@ const projects = [
     margin-bottom: calc(var(--space-7) * 0.25);
     opacity: 0;
     transform: translateY(20px);
-    animation: revealTitle 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: 0.8s;
+    animation: revealTitle 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 1.2s;
+    will-change: transform, opacity;
   }
 
   .banner-content {
     width: 100%;
     overflow: hidden;
     position: relative;
+    opacity: 0;
+    animation: fadeIn 0.4s ease forwards;
+    animation-delay: 1.6s;
   }
 
   .scroll-track {
     display: flex;
     gap: var(--space-4);
     animation: scroll 30s linear infinite;
-    animation-delay: 1.2s;
     animation-play-state: paused;
     width: max-content;
     padding: var(--space-7) 0;
-    opacity: 0;
     will-change: transform;
   }
 
   .scroll-track.loaded {
     animation-play-state: running;
-    opacity: 1;
   }
 
   .photo-item {
@@ -114,8 +117,11 @@ const projects = [
     display: block;
     height: 360px;
     transform: scale(0.98);
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform;
+    opacity: 0;
+    animation: fadeIn 0.4s ease forwards;
+    animation-delay: calc(1.6s + var(--delay, 0s));
   }
 
   .photo-item:hover {
@@ -137,6 +143,7 @@ const projects = [
     z-index: 2;
     opacity: 0;
     transition: opacity 0.4s ease;
+    will-change: opacity;
   }
 
   .gradient-overlay.left {
@@ -179,6 +186,15 @@ const projects = [
     }
   }
 
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   @keyframes scroll {
     to {
       transform: translateX(-50%);
@@ -202,6 +218,7 @@ const projects = [
     const scrollTrack = document.querySelector('.scroll-track');
     const images = document.querySelectorAll('.photo-item img');
     const overlays = document.querySelectorAll('.gradient-overlay');
+    const photoItems = document.querySelectorAll('.photo-item');
     
     let imagesLoaded = 0;
     const totalImages = images.length;
@@ -212,6 +229,10 @@ const projects = [
         scrollTrack?.classList.add('loaded');
         overlays.forEach(overlay => {
           overlay.style.opacity = '1';
+        });
+        
+        photoItems.forEach((item, index) => {
+          item.style.setProperty('--delay', `${index * 0.1}s`);
         });
       }
     }
