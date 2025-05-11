@@ -37,7 +37,7 @@ const projects = [
   <div class="container">
     <div class="banner-header">
       <h2 class="banner-title">Featured Projects</h2>
-      <a href="/work" class="banner-cta">View All Projects</a>
+      <a href="/work" class="button">View All</a>
     </div>
   </div>
   <div class="banner-content">
@@ -95,27 +95,6 @@ const projects = [
     animation: revealTitle 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     animation-delay: 1.2s;
     will-change: transform, opacity;
-  }
-
-  .banner-cta {
-    display: inline-flex;
-    align-items: center;
-    padding: var(--space-3) var(--space-5);
-    background-color: var(--color-primary);
-    color: white;
-    border-radius: 30px;
-    font-weight: 500;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: revealCta 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 1.3s;
-    will-change: transform, opacity;
-    transition: all var(--transition-standard);
-  }
-
-  .banner-cta:hover {
-    background-color: var(--color-accent);
-    transform: translateY(-2px);
   }
 
   .banner-content {
@@ -206,17 +185,6 @@ const projects = [
   }
 
   @keyframes revealTitle {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes revealCta {
     from {
       opacity: 0;
       transform: translateY(20px);
