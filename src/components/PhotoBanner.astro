@@ -64,8 +64,8 @@ const projects = [
     opacity: 0;
     transform: translateY(30px);
     filter: blur(10px);
-    animation: bannerReveal 1.2s ease forwards;
-    animation-delay: 2s;
+    animation: bannerReveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 1.8s;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
@@ -78,8 +78,8 @@ const projects = [
     opacity: 0;
     transform: translateY(30px);
     filter: blur(10px);
-    animation: titleReveal 1.2s var(--transition-bounce) forwards;
-    animation-delay: 1.8s;
+    animation: titleReveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 1.6s;
   }
 
   .banner-content {
@@ -91,11 +91,12 @@ const projects = [
   .scroll-track {
     display: flex;
     gap: var(--space-4);
-    animation: scroll 30s linear infinite;
-    animation-delay: 2.4s;
+    animation: scrollReveal 30s linear infinite;
+    animation-delay: 2.2s;
     width: max-content;
     padding: var(--space-7) 0;
     opacity: 0;
+    will-change: transform;
   }
 
   .photo-item {
@@ -103,6 +104,12 @@ const projects = [
     overflow: hidden;
     display: block;
     height: 360px;
+    transform: scale(0.98);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .photo-item:hover {
+    transform: scale(1);
   }
 
   .photo-item img {
@@ -115,16 +122,19 @@ const projects = [
     position: absolute;
     top: 0;
     height: 100%;
-    width: 6.25vw;
+    width: 8vw;
     pointer-events: none;
     z-index: 2;
+    opacity: 0;
+    animation: overlayReveal 0.8s ease forwards;
+    animation-delay: 2s;
   }
 
   .gradient-overlay.left {
     left: 0;
     background: linear-gradient(
       to right,
-      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 1) 20%,
       rgba(255, 255, 255, 0)
     );
   }
@@ -133,7 +143,7 @@ const projects = [
     right: 0;
     background: linear-gradient(
       to left,
-      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 1) 20%,
       rgba(255, 255, 255, 0)
     );
   }
@@ -164,10 +174,13 @@ const projects = [
     }
   }
 
-  @keyframes scroll {
+  @keyframes scrollReveal {
     0% {
-      opacity: 1;
+      opacity: 0;
       transform: translateX(0);
+    }
+    2% {
+      opacity: 1;
     }
     100% {
       opacity: 1;
@@ -175,10 +188,23 @@ const projects = [
     }
   }
 
+  @keyframes overlayReveal {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   @media (max-width: 768px) {
     .photo-item {
       width: 300px !important;
       height: 360px !important;
+    }
+    
+    .gradient-overlay {
+      width: 12vw;
     }
   }
 </style>
