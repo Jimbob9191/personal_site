@@ -57,7 +57,7 @@ const projects = [
 <style>
   .photo-banner {
     position: relative;
-    width: 100%;
+    width: 100vw;
     overflow: hidden;
     padding: 0 0 var(--space-6) 0;
     margin-top: calc(var(--space-6) * -1);
@@ -65,6 +65,10 @@ const projects = [
     transform: translateY(30px);
     animation: fadeIn 0.8s ease forwards;
     animation-delay: 1s;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
   }
 
   .banner-title {
@@ -108,7 +112,7 @@ const projects = [
     position: absolute;
     top: 0;
     height: 100%;
-    width: 100px;
+    width: 25vw;
     pointer-events: none;
     z-index: 2;
   }
