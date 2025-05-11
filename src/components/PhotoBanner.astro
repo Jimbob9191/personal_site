@@ -35,7 +35,10 @@ const projects = [
 
 <section class="photo-banner">
   <div class="container">
-    <h2 class="banner-title fade-in">Featured Projects</h2>
+    <div class="banner-header">
+      <h2 class="banner-title">Featured Projects</h2>
+      <a href="/work" class="button">View All</a>
+    </div>
   </div>
   <div class="banner-content">
     <div class="scroll-track">
@@ -45,49 +48,76 @@ const projects = [
           class="photo-item"
           style={`width: ${project.width};`}
         >
-          <img src={project.url} alt={project.title} />
+          <img 
+            src={project.url} 
+            alt={project.title}
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+          />
         </a>
       ))}
     </div>
-    <div class="frost-overlay left"></div>
-    <div class="frost-overlay right"></div>
+    <div class="gradient-overlay left"></div>
+    <div class="gradient-overlay right"></div>
   </div>
 </section>
 
 <style>
   .photo-banner {
     position: relative;
-    width: 100%;
+    width: 100vw;
     overflow: hidden;
     padding: 0 0 var(--space-6) 0;
     margin-top: calc(var(--space-6) * -1);
     opacity: 0;
     transform: translateY(30px);
-    animation: fadeIn 0.8s ease forwards;
-    animation-delay: 1s;
+    animation: revealBanner 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 1.4s;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    will-change: transform, opacity;
+  }
+
+  .banner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: calc(var(--space-7) * 0.25);
   }
 
   .banner-title {
     font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: var(--space-7);
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeIn 0.8s ease forwards;
+    animation: revealTitle 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     animation-delay: 1.2s;
+    will-change: transform, opacity;
   }
 
   .banner-content {
     width: 100%;
     overflow: hidden;
     position: relative;
+    opacity: 0;
+    animation: fadeIn 0.4s ease forwards;
+    animation-delay: 1.6s;
   }
 
   .scroll-track {
     display: flex;
     gap: var(--space-4);
     animation: scroll 30s linear infinite;
-    animation-delay: 1s;
+    animation-play-state: paused;
     width: max-content;
+    padding: var(--space-7) 0;
+    will-change: transform;
+  }
+
+  .scroll-track.loaded {
+    animation-play-state: running;
   }
 
   .photo-item {
@@ -95,6 +125,16 @@ const projects = [
     overflow: hidden;
     display: block;
     height: 360px;
+    transform: scale(0.98);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+    opacity: 0;
+    animation: fadeIn 0.4s ease forwards;
+    animation-delay: calc(1.6s + var(--delay, 0s));
+  }
+
+  .photo-item:hover {
+    transform: scale(1);
   }
 
   .photo-item img {
@@ -103,55 +143,121 @@ const projects = [
     object-fit: cover;
   }
 
-  .frost-overlay {
+  .gradient-overlay {
     position: absolute;
     top: 0;
     height: 100%;
-    width: 150px;
+    width: 8vw;
     pointer-events: none;
     z-index: 2;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    will-change: opacity;
   }
 
-  .frost-overlay.left {
+  .gradient-overlay.left {
     left: 0;
     background: linear-gradient(
       to right,
-      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 1) 20%,
       rgba(255, 255, 255, 0)
     );
-    backdrop-filter: blur(10px);
   }
 
-  .frost-overlay.right {
+  .gradient-overlay.right {
     right: 0;
     background: linear-gradient(
       to left,
-      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 1) 20%,
       rgba(255, 255, 255, 0)
     );
-    backdrop-filter: blur(10px);
   }
 
-  @keyframes fadeIn {
+  @keyframes revealBanner {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
+  @keyframes revealTitle {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
     }
-    100% {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scroll {
+    to {
       transform: translateX(-50%);
     }
   }
 
   @media (max-width: 768px) {
+    .banner-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
     .photo-item {
       width: 300px !important;
       height: 360px !important;
     }
+    
+    .gradient-overlay {
+      width: 12vw;
+    }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollTrack = document.querySelector('.scroll-track');
+    const images = document.querySelectorAll('.photo-item img');
+    const overlays = document.querySelectorAll('.gradient-overlay');
+    const photoItems = document.querySelectorAll('.photo-item');
+    
+    let imagesLoaded = 0;
+    const totalImages = images.length;
+
+    function handleImageLoad() {
+      imagesLoaded++;
+      if (imagesLoaded === totalImages) {
+        scrollTrack?.classList.add('loaded');
+        overlays.forEach(overlay => {
+          overlay.style.opacity = '1';
+        });
+        
+        photoItems.forEach((item, index) => {
+          item.style.setProperty('--delay', `${index * 0.1}s`);
+        });
+      }
+    }
+
+    images.forEach(img => {
+      if (img.complete) {
+        handleImageLoad();
+      } else {
+        img.addEventListener('load', handleImageLoad);
+      }
+    });
+  });
+</script>

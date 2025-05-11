@@ -48,8 +48,6 @@ const projects = [
   
   <section class="featured-work section">
     <div class="container">
-      <h2 class="section-title fade-in">Featured Work</h2>
-      
       <div class="projects-grid">
         <div class="project-main">
           <ProjectCard
@@ -76,7 +74,7 @@ const projects = [
         </div>
       </div>
       
-      <div class="projects-action fade-in">
+      <div class="projects-action">
         <a href="/work" class="button">View All Projects</a>
       </div>
     </div>
@@ -90,15 +88,15 @@ const projects = [
 </Layout>
 
 <style>
-  .section-title {
-    text-align: left;
-    margin-bottom: var(--space-7);
-  }
-  
   .projects-grid {
     display: grid;
     gap: var(--space-8);
     margin-bottom: var(--space-7);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealProjects 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 1.8s;
+    will-change: transform, opacity;
   }
   
   .project-main {
@@ -114,6 +112,33 @@ const projects = [
   .projects-action {
     display: flex;
     justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealAction 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 2s;
+    will-change: transform, opacity;
+  }
+
+  @keyframes revealProjects {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes revealAction {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   @media (max-width: 768px) {
@@ -130,28 +155,6 @@ const projects = [
   gsap.registerPlugin(ScrollTrigger);
   
   document.addEventListener('DOMContentLoaded', () => {
-    const fadeElements = document.querySelectorAll('.fade-in');
-    
-    fadeElements.forEach((el) => {
-      gsap.fromTo(
-        el,
-        { 
-          opacity: 0,
-          y: 30
-        },
-        { 
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 80%',
-            toggleActions: 'play none none none'
-          }
-        }
-      );
-    });
-    
     const projectCards = document.querySelectorAll('.project-card');
     
     projectCards.forEach((card, index) => {
@@ -164,8 +167,9 @@ const projects = [
         { 
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          delay: index * 0.1,
+          duration: 0.8,
+          delay: index * 0.15 + 2,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: card,
             start: 'top 90%',

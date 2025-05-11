@@ -31,6 +31,9 @@
     flex-direction: column;
     justify-content: center;
     padding: var(--space-8) 0;
+    opacity: 0;
+    animation: fadeInHero 0.01s linear forwards;
+    will-change: opacity;
   }
   
   .hero-title {
@@ -45,15 +48,24 @@
     display: block;
     transform: translateY(100%);
     opacity: 0;
-    filter: blur(10px);
-    animation: slideUpAndClarify 0.8s var(--transition-bounce) forwards;
+    animation: revealLine 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    will-change: transform, opacity;
   }
   
-  @keyframes slideUpAndClarify {
+  @keyframes fadeInHero {
     to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes revealLine {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
       transform: translateY(0);
       opacity: 1;
-      filter: blur(0);
     }
   }
   
@@ -61,16 +73,19 @@
     max-width: 800px;
     opacity: 0;
     transform: translateY(20px);
-    filter: blur(10px);
-    animation: fadeInAndClarify 0.8s ease forwards;
-    animation-delay: 0.6s;
+    animation: revealContent 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.4s;
+    will-change: transform, opacity;
   }
   
-  @keyframes fadeInAndClarify {
-    to {
+  @keyframes revealContent {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
       opacity: 1;
       transform: translateY(0);
-      filter: blur(0);
     }
   }
   
@@ -86,6 +101,22 @@
     gap: var(--space-4);
     flex-wrap: wrap;
     margin-top: var(--space-7);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealButtons 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.6s;
+    will-change: transform, opacity;
+  }
+  
+  @keyframes revealButtons {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   @media (max-width: 768px) {
