@@ -104,10 +104,10 @@ const projects = [
   }
 
   .frost-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     height: 100%;
-    width: 200px;
+    width: 150px;
     pointer-events: none;
     z-index: 2;
   }
@@ -116,24 +116,20 @@ const projects = [
     left: 0;
     background: linear-gradient(
       to right,
-      rgba(255, 255, 255, 1),
-      rgba(255, 255, 255, 0.8) 20%,
+      rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0)
     );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(10px);
   }
 
   .frost-overlay.right {
     right: 0;
     background: linear-gradient(
       to left,
-      rgba(255, 255, 255, 1),
-      rgba(255, 255, 255, 0.8) 20%,
+      rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0)
     );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(10px);
   }
 
   @keyframes fadeIn {
@@ -156,10 +152,6 @@ const projects = [
     .photo-item {
       width: 300px !important;
       height: 360px !important;
-    }
-    
-    .frost-overlay {
-      width: 100px;
     }
   }
 </style>
