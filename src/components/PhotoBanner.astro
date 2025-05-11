@@ -3,27 +3,32 @@ const projects = [
   {
     url: "https://images.pexels.com/photos/3987066/pexels-photo-3987066.jpeg",
     title: "Finance App Redesign",
-    slug: "finance-app"
+    slug: "finance-app",
+    isPortrait: false
   },
   {
     url: "https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg",
     title: "E-commerce Website",
-    slug: "ecommerce-website"
+    slug: "ecommerce-website",
+    isPortrait: true
   },
   {
     url: "https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg",
     title: "Health & Wellness Platform",
-    slug: "health-platform"
+    slug: "health-platform",
+    isPortrait: false
   },
   {
     url: "https://images.pexels.com/photos/2007401/pexels-photo-2007401.jpeg",
     title: "Travel Booking App",
-    slug: "travel-app"
+    slug: "travel-app",
+    isPortrait: true
   },
   {
     url: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg",
     title: "Music Streaming Dashboard",
-    slug: "music-dashboard"
+    slug: "music-dashboard",
+    isPortrait: false
   }
 ];
 ---
@@ -32,7 +37,7 @@ const projects = [
   <div class="banner-content">
     <div class="scroll-track">
       {[...projects, ...projects].map((project) => (
-        <a href={`/work/${project.slug}`} class="photo-item">
+        <a href={`/work/${project.slug}`} class={`photo-item ${project.isPortrait ? 'portrait' : 'landscape'}`}>
           <img src={project.url} alt={project.title} />
         </a>
       ))}
@@ -67,11 +72,19 @@ const projects = [
   }
 
   .photo-item {
-    width: 360px;
-    height: 240px;
     border-radius: 8px;
     overflow: hidden;
     display: block;
+  }
+
+  .photo-item.landscape {
+    width: 360px;
+    height: 240px;
+  }
+
+  .photo-item.portrait {
+    width: 240px;
+    height: 360px;
   }
 
   .photo-item img {
@@ -97,9 +110,14 @@ const projects = [
   }
 
   @media (max-width: 768px) {
-    .photo-item {
+    .photo-item.landscape {
       width: 300px;
       height: 200px;
+    }
+
+    .photo-item.portrait {
+      width: 200px;
+      height: 300px;
     }
   }
 </style>
