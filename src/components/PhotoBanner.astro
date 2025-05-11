@@ -4,31 +4,36 @@ const projects = [
     url: "https://images.pexels.com/photos/3987066/pexels-photo-3987066.jpeg",
     title: "Finance App Redesign",
     slug: "finance-app",
-    isPortrait: false
+    width: "480px",
+    height: "360px"
   },
   {
     url: "https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg",
     title: "E-commerce Website",
     slug: "ecommerce-website",
-    isPortrait: true
+    width: "360px",
+    height: "480px"
   },
   {
     url: "https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg",
     title: "Health & Wellness Platform",
     slug: "health-platform",
-    isPortrait: false
+    width: "480px",
+    height: "360px"
   },
   {
     url: "https://images.pexels.com/photos/2007401/pexels-photo-2007401.jpeg",
     title: "Travel Booking App",
     slug: "travel-app",
-    isPortrait: true
+    width: "360px",
+    height: "480px"
   },
   {
     url: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg",
     title: "Music Streaming Dashboard",
     slug: "music-dashboard",
-    isPortrait: false
+    width: "480px",
+    height: "360px"
   }
 ];
 ---
@@ -37,7 +42,11 @@ const projects = [
   <div class="banner-content">
     <div class="scroll-track">
       {[...projects, ...projects].map((project) => (
-        <a href={`/work/${project.slug}`} class={`photo-item ${project.isPortrait ? 'portrait' : 'landscape'}`}>
+        <a 
+          href={`/work/${project.slug}`} 
+          class="photo-item"
+          style={`width: ${project.width}; height: ${project.height};`}
+        >
           <img src={project.url} alt={project.title} />
         </a>
       ))}
@@ -77,16 +86,6 @@ const projects = [
     display: block;
   }
 
-  .photo-item.landscape {
-    width: 360px;
-    height: 240px;
-  }
-
-  .photo-item.portrait {
-    width: 240px;
-    height: 360px;
-  }
-
   .photo-item img {
     width: 100%;
     height: 100%;
@@ -110,14 +109,9 @@ const projects = [
   }
 
   @media (max-width: 768px) {
-    .photo-item.landscape {
-      width: 300px;
-      height: 200px;
-    }
-
-    .photo-item.portrait {
-      width: 200px;
-      height: 300px;
+    .photo-item {
+      width: 300px !important;
+      height: 400px !important;
     }
   }
 </style>
