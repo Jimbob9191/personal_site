@@ -39,6 +39,9 @@
     margin-bottom: var(--space-4);
     overflow: visible;
     padding: 0.1em 0;
+    opacity: 0;
+    animation: fadeInTitle 0.01s linear forwards;
+    will-change: opacity;
   }
   
   .hero-line {
@@ -46,11 +49,17 @@
     transform: translateY(100%);
     opacity: 0;
     filter: blur(10px);
-    animation: slideUpAndClarify 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: revealLine 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
     will-change: transform, opacity, filter;
   }
   
-  @keyframes slideUpAndClarify {
+  @keyframes fadeInTitle {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes revealLine {
     0% {
       transform: translateY(100%);
       opacity: 0;
@@ -67,22 +76,19 @@
     max-width: 800px;
     opacity: 0;
     transform: translateY(20px);
-    filter: blur(10px);
-    animation: fadeInAndClarify 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.8s;
-    will-change: transform, opacity, filter;
+    animation: revealContent 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    animation-delay: 0.6s;
+    will-change: transform, opacity;
   }
   
-  @keyframes fadeInAndClarify {
+  @keyframes revealContent {
     0% {
       opacity: 0;
       transform: translateY(20px);
-      filter: blur(10px);
     }
     100% {
       opacity: 1;
       transform: translateY(0);
-      filter: blur(0);
     }
   }
   
@@ -100,17 +106,17 @@
     margin-top: var(--space-7);
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInButtons 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 1s;
+    animation: revealButtons 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    animation-delay: 0.8s;
     will-change: transform, opacity;
   }
-
-  @keyframes fadeInButtons {
-    from {
+  
+  @keyframes revealButtons {
+    0% {
       opacity: 0;
       transform: translateY(20px);
     }
-    to {
+    100% {
       opacity: 1;
       transform: translateY(0);
     }
