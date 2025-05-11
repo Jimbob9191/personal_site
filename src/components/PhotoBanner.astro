@@ -49,8 +49,8 @@ const projects = [
         </a>
       ))}
     </div>
-    <div class="frost-overlay left"></div>
-    <div class="frost-overlay right"></div>
+    <div class="frost-gradient left"></div>
+    <div class="frost-gradient right"></div>
   </div>
 </section>
 
@@ -103,37 +103,85 @@ const projects = [
     object-fit: cover;
   }
 
-  .frost-overlay {
-    position: fixed;
+  .frost-gradient {
+    position: absolute;
     top: 0;
     height: 100%;
-    width: 200px;
+    width: 300px;
     pointer-events: none;
     z-index: 2;
   }
 
-  .frost-overlay.left {
+  .frost-gradient.left {
     left: 0;
     background: linear-gradient(
       to right,
-      rgba(255, 255, 255, 1),
-      rgba(255, 255, 255, 0.8) 20%,
-      rgba(255, 255, 255, 0)
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.95) 10%,
+      rgba(255, 255, 255, 0.85) 20%,
+      rgba(255, 255, 255, 0.75) 30%,
+      rgba(255, 255, 255, 0.6) 40%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.2) 65%,
+      rgba(255, 255, 255, 0.1) 80%,
+      transparent 100%
     );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.8) 20%,
+      rgba(0, 0, 0, 0.6) 40%,
+      rgba(0, 0, 0, 0.4) 60%,
+      rgba(0, 0, 0, 0.2) 80%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.8) 20%,
+      rgba(0, 0, 0, 0.6) 40%,
+      rgba(0, 0, 0, 0.4) 60%,
+      rgba(0, 0, 0, 0.2) 80%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 
-  .frost-overlay.right {
+  .frost-gradient.right {
     right: 0;
     background: linear-gradient(
       to left,
-      rgba(255, 255, 255, 1),
-      rgba(255, 255, 255, 0.8) 20%,
-      rgba(255, 255, 255, 0)
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.95) 10%,
+      rgba(255, 255, 255, 0.85) 20%,
+      rgba(255, 255, 255, 0.75) 30%,
+      rgba(255, 255, 255, 0.6) 40%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.2) 65%,
+      rgba(255, 255, 255, 0.1) 80%,
+      transparent 100%
     );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
+    mask-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.8) 20%,
+      rgba(0, 0, 0, 0.6) 40%,
+      rgba(0, 0, 0, 0.4) 60%,
+      rgba(0, 0, 0, 0.2) 80%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.8) 20%,
+      rgba(0, 0, 0, 0.6) 40%,
+      rgba(0, 0, 0, 0.4) 60%,
+      rgba(0, 0, 0, 0.2) 80%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 
   @keyframes fadeIn {
@@ -158,8 +206,8 @@ const projects = [
       height: 360px !important;
     }
     
-    .frost-overlay {
-      width: 100px;
+    .frost-gradient {
+      width: 150px;
     }
   }
 </style>
