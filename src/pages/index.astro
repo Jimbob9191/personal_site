@@ -48,7 +48,7 @@ const projects = [
   
   <section class="featured-work section">
     <div class="container">
-      <h2 class="section-title fade-in">Featured Work</h2>
+      <h2 class="section-title">Featured Work</h2>
       
       <div class="projects-grid">
         <div class="project-main">
@@ -93,6 +93,11 @@ const projects = [
   .section-title {
     text-align: left;
     margin-bottom: var(--space-7);
+    opacity: 0;
+    transform: translateY(100%);
+    filter: blur(10px);
+    animation: slideUpAndClarify 0.8s var(--transition-bounce) forwards;
+    animation-delay: 0.2s;
   }
   
   .projects-grid {
@@ -114,6 +119,14 @@ const projects = [
   .projects-action {
     display: flex;
     justify-content: center;
+  }
+
+  @keyframes slideUpAndClarify {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+      filter: blur(0);
+    }
   }
   
   @media (max-width: 768px) {

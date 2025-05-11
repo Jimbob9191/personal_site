@@ -35,7 +35,7 @@ const projects = [
 
 <section class="photo-banner">
   <div class="container">
-    <h2 class="banner-title fade-in">Featured Projects</h2>
+    <h2 class="banner-title">Featured Projects</h2>
   </div>
   <div class="banner-content">
     <div class="scroll-track">
@@ -63,7 +63,8 @@ const projects = [
     margin-top: calc(var(--space-6) * -1);
     opacity: 0;
     transform: translateY(30px);
-    animation: fadeIn 0.8s ease forwards;
+    filter: blur(10px);
+    animation: fadeInAndClarify 0.8s ease forwards;
     animation-delay: 1s;
     left: 50%;
     right: 50%;
@@ -76,7 +77,8 @@ const projects = [
     margin-bottom: calc(var(--space-7) * 0.25);
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeIn 0.8s ease forwards;
+    filter: blur(10px);
+    animation: fadeInAndClarify 0.8s ease forwards;
     animation-delay: 1.2s;
   }
 
@@ -135,10 +137,11 @@ const projects = [
     );
   }
 
-  @keyframes fadeIn {
+  @keyframes fadeInAndClarify {
     to {
       opacity: 1;
       transform: translateY(0);
+      filter: blur(0);
     }
   }
 
