@@ -34,6 +34,9 @@ const projects = [
 ---
 
 <section class="photo-banner">
+  <div class="container">
+    <h2 class="banner-title fade-in">Featured Projects</h2>
+  </div>
   <div class="banner-content">
     <div class="scroll-track">
       {[...projects, ...projects].map((project) => (
@@ -60,6 +63,15 @@ const projects = [
     transform: translateY(30px);
     animation: fadeIn 0.8s ease forwards;
     animation-delay: 1s;
+  }
+
+  .banner-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: var(--space-6);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.8s ease forwards;
+    animation-delay: 1.2s;
   }
 
   .banner-content {
