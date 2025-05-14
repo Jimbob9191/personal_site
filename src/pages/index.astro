@@ -3,82 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import PhotoBanner from '../components/PhotoBanner.astro';
 import AboutSection from '../components/AboutSection.astro';
-import ProjectCard from '../components/ProjectCard.astro';
 import Skills from '../components/Skills.astro';
 import ContactCTA from '../components/ContactCTA.astro';
-
-const projects = [
-  {
-    title: "Finance App Redesign",
-    category: "UX/UI Design",
-    image: "https://images.pexels.com/photos/6804581/pexels-photo-6804581.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    slug: "finance-app"
-  },
-  {
-    title: "E-commerce Website",
-    category: "Web Design & Development",
-    image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    slug: "ecommerce-website"
-  },
-  {
-    title: "Health & Wellness Platform",
-    category: "Product Design",
-    image: "https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    slug: "health-platform"
-  },
-  {
-    title: "Travel Booking App",
-    category: "Mobile App Design",
-    image: "https://images.pexels.com/photos/2007401/pexels-photo-2007401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    slug: "travel-app"
-  },
-  {
-    title: "Music Streaming Dashboard",
-    category: "Dashboard Design",
-    image: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    slug: "music-dashboard"
-  }
-];
 ---
 
 <Layout title="James - UX/UI Designer & Product Manager">
   <Hero />
   
   <PhotoBanner />
-  
-  <section class="featured-work section">
-    <div class="container">
-      <div class="projects-grid">
-        <div class="project-main">
-          <ProjectCard
-            title={projects[0].title}
-            category={projects[0].category}
-            image={projects[0].image}
-            slug={projects[0].slug}
-            index={0}
-          />
-        </div>
-        
-        <div class="projects-secondary">
-          {projects.slice(1, 5).map((project, index) => (
-            <div class="project-item">
-              <ProjectCard
-                title={project.title}
-                category={project.category}
-                image={project.image}
-                slug={project.slug}
-                index={index + 1}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      <div class="projects-action">
-        <a href="/work" class="button">View All Projects</a>
-      </div>
-    </div>
-  </section>
   
   <AboutSection />
   
@@ -88,59 +20,6 @@ const projects = [
 </Layout>
 
 <style>
-  .projects-grid {
-    display: grid;
-    gap: var(--space-8);
-    margin-bottom: var(--space-7);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: revealProjects 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 1.8s;
-    will-change: transform, opacity;
-  }
-  
-  .project-main {
-    grid-column: 1 / -1;
-  }
-  
-  .projects-secondary {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-8);
-  }
-  
-  .projects-action {
-    display: flex;
-    justify-content: center;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: revealAction 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 2s;
-    will-change: transform, opacity;
-  }
-
-  @keyframes revealProjects {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes revealAction {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
   @media (max-width: 768px) {
     .projects-secondary {
       grid-template-columns: 1fr;
